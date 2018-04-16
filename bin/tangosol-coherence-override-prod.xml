@@ -1,0 +1,38 @@
+<?xml version='1.0'?>
+
+<!-- This operational configuration override file is set up for use with Coherence in a development mode. -->
+
+<coherence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.oracle.com/coherence/coherence-operational-config" xsi:schemaLocation="http://xmlns.oracle.com/coherence/coherence-operational-config coherence-operational-config.xsd" xml-override="/tangosol-coherence-override.xml">
+
+	<cluster-config>
+		<member-identity>
+			<!-- Note: All members of the cluster must specify the same cluster name in order to be allowed to join the cluster. -->
+			<cluster-name system-property="tangosol.coherence.cluster">YunduoCluster</cluster-name>
+		</member-identity>
+		<unicast-listener>
+			<!-- Note: Specifying one or more "well known" addresses (WKA) will disable all multicast communication. In this case, for a member to join the cluster it will either have to be a WKA or there will have to be at least one WKA member running. -->
+			<well-known-addresses>
+				<socket-address id="1">
+					<address system-property="tangosol.coherence.wka">localhost</address>
+					<port system-property="tangosol.coherence.wka.port">8088</port>
+				</socket-address>
+				<!-- <socket-address id="1"> <address system-property="tangosol.coherence.wka">192.168.213.97</address> <port system-property="tangosol.coherence.wka.port">8088</port> </socket-address> -->
+				<!-- <socket-address id="2"> <address system-property="tangosol.coherence.wka">192.168.206.172</address> <port system-property="tangosol.coherence.wka.port">8088</port> </socket-address> -->
+				<!-- <socket-address id="1"> <address system-property="tangosol.coherence.wka">localhost</address> <port system-property="tangosol.coherence.wka.port">8088</port> </socket-address> -->
+				<!-- <socket-address id="1"> <address system-property="tangosol.coherence.wka">192.168.0.155</address> <port system-property="tangosol.coherence.wka.port">8088</port> </socket-address> <socket-address id="2"> <address system-property="tangosol.coherence.wka">192.168.0.121</address> <port system-property="tangosol.coherence.wka.port">8088</port> </socket-address> -->
+			</well-known-addresses>
+
+			<!-- Note: The "localhost" setting may not work on systems that define localhost as the loopback address; in that case, specify the machine name or the specific IP address. -->
+			<address system-property="tangosol.coherence.localhost">localhost</address>
+			<port system-property="tangosol.coherence.localport">8088</port>
+			<port-auto-adjust system-property="tangosol.coherence.localport.adjust">false</port-auto-adjust>
+			<priority>8</priority>
+		</unicast-listener>
+		<!-- <multicast-listener> <time-to-live system-property="tangosol.coherence.ttl">4</time-to-live> <join-timeout-milliseconds>3000</join-timeout-milliseconds> </multicast-listener> -->
+	</cluster-config>
+
+	<logging-config>
+		<severity-level system-property="tangosol.coherence.log.level">5</severity-level>
+		<character-limit system-property="tangosol.coherence.log.limit">0</character-limit>
+	</logging-config>
+</coherence>
